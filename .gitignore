@@ -1,3 +1,14 @@
+/.metadata/
+/.classpath
+/.project
+/.settings/
+/bin/
+/.springBeans
+/.gitattributes
+target/
+INF/maven/com.book/controller/pom.properties
+
+
 # Compiled class file
 *.class
 
