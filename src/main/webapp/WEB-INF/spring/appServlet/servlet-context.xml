@@ -14,6 +14,15 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- 인터셉터 적용 -->
+	 <interceptors>
+		<interceptor>
+			<mapping path="/cart/**"/>
+			<exclude-mapping path="/cart/add"/>
+			<beans:bean id="CartIntreceptor" class="com.book.interceptor.CartInterceptor"></beans:bean>
+		</interceptor>
+    </interceptors>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -21,7 +30,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.book.main" />
+	<context:component-scan base-package="com.book.*" />
 	
 	
 	

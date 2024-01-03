@@ -2,4 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="cart">
 
+	<!-- 카트 추가 -->
+	<insert id="addCart">
+	
+		insert into CART(USER_NO, BOOK_ID, CART_COUNT)
+		values(#{USER_NO}, #{BOOK_ID}, #{CART_COUNT}) 
+	
+	</insert>
+	
+	
+	<!-- 카트 삭제 -->
+	<delete id="deleteCart">
+	
+		delete from CART where CART_ID = #{CART_ID}
+	
+	</delete>
+	
+	<!-- 카트 수량 수정 -->
+	<update id="modifyCount">
+	
+		update CART set CART_COUNT=#{CART_COUNT} where CART_ID = #{CART_ID}
+	
+	</update>
+	
+	<!-- 카트 목록 -->
+	<select id="getCart" resultType="com.book.model.CartVO">
+	
+		select a.CART_ID, a.USER_NO, a.BOOK_ID, a.CART_COUNT, b.BOOK_NAME, b.BOOK_PRICE, b.BOOK_DISCOUNT
+		from CART a left outer join BOOK b on a.BOOK_ID = b.BOOK_ID
+		where USER_NO = #{USER_NO}	
+	
+	</select>
+	
+	<!-- 카트 확인 -->
+	<select id="checkCart" resultType="com.book.model.CartVO">
+	
+		select * from CART 
+		where USER_NO = #{USER_NO} and BOOK_ID = #{BOOK_ID}
+	
+	</select>
+	
 </mapper>
